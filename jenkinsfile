@@ -1,0 +1,25 @@
+pipeline {
+    agent any 
+
+    stages {
+        stage('Clone Repository') { 
+            steps {
+                checkout scm
+            }
+        }
+        stage('Install Dependencies') { 
+            steps {
+                script {
+                    sh 'pip install -r requirements.txt'
+                }
+            }
+        }
+        stage('Execute Tests') { 
+            steps {
+                script {
+                    sh 'python test.py'
+                }
+            }
+        }
+    }
+}
